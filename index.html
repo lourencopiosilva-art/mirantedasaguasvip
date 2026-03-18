@@ -152,9 +152,13 @@
     <section id="cadastro" class="form-section">
         <h2>Receba o Material Completo</h2>
         <p>Fale agora com o time do especialista <strong>Lourenço Pio</strong>.</p>
-        <form>
-            <input type="text" placeholder="Seu Nome Completo" required>
-            <input type="tel" placeholder="Seu WhatsApp com DDD" required>
+        
+        <form action="https://api.sheetmonkey.io/form/5t9WYFvFZ3hbnPNr5VF6py" method="POST">
+            <input type="text" name="Nome" placeholder="Seu Nome Completo" required>
+            <input type="tel" name="WhatsApp" placeholder="Seu WhatsApp com DDD" required>
+            
+            <input type="hidden" name="Data" value="x-sheetmonkey-current-date-time" />
+            
             <button type="submit" class="btn">Cadastrar na Lista VIP</button>
         </form>
     </section>
