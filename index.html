@@ -84,6 +84,31 @@
             .content-section { grid-template-columns: 1fr; text-align: center; }
             .hero h1 { font-size: 2.2rem; }
         }
+
+        /* Popup de Sucesso Estilizado */
+#popupVIP {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #c5a059; /* O dourado do projeto */
+    color: white;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    z-index: 10000;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #ffffff33;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
     </style>
 </head>
 <body>
@@ -163,5 +188,41 @@
         </form>
     </section>
 
+    <div id="popupVIP">
+    ✅ Cadastro Realizado!<br>
+    <span style="font-weight: normal; font-size: 0.9rem;">Aguarde, nossa equipe entrará em contato.</span>
+</div>
+
+<script>
+    const form = document.querySelector('form');
+    const popup = document.getElementById('popupVIP');
+
+    form.addEventListener('submit', function(e) {
+        // 1. Não deixa a página recarregar ou ir para o site do SheetMonkey
+        e.preventDefault(); 
+
+        const formData = new FormData(form);
+
+        // 2. Envia os dados "por trás das cortinas"
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors' // Necessário para evitar erros de segurança com SheetMonkey
+        }).then(() => {
+            // 3. Sucesso: Mostra o popup dourado
+            popup.style.display = 'block';
+            
+            // 4. Limpa o formulário para o próximo
+            form.reset();
+
+            // 5. Conta 3 segundos e some com o popup
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }).catch(error => {
+            alert('Ops! Algo deu errado. Tente pelo WhatsApp!');
+        });
+    });
+</script>
 </body>
 </html>
